@@ -6,6 +6,24 @@ import SectionHeader from "./SectionHeader";
 export default function Contact() {
   const mailto = `mailto:${content.email}?subject=Portfolio%20enquiry%20for%20Aswanth%20K.T`;
 
+  const WhatsAppIcon = ({ size = 22, className = "" }) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M20 11.5C20 16.2 16.2 20 11.5 20a8.4 8.4 0 0 1-3.9-.9L4 20l1-3.5A8.4 8.4 0 0 1 3.5 11.5C3.5 6.8 7.3 3 12 3s8 3.8 8 8.5z"/>
+      <path d="M9.3 8.8c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.4 1.9.8 2.3.6 2.7.6.4-.1 1.2-.5 1.4-1 .2-.5.2-.9.1-1-.1-.1-.4-.2-.9-.5s-1-.5-1.2-.6c-.2-.1-.4-.1-.6.1-.2.2-.6.7-.8.8-.2.1-.3.1-.6 0-.3-.2-1.2-.5-2.2-1.5-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.6.1-.1.2-.3.4-.4.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.5-1.2-.7-1.6z"/>
+    </svg>
+  );
+
   return (
     <section id="contact" className="section-pad bg-steel/30">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -33,12 +51,19 @@ export default function Contact() {
                 </p>
               </div>
               <div className="flex gap-3 pt-2">
-                <a className="icon-link" href={content.links.linkedin} aria-label="LinkedIn">
+
+                <a className="icon-link" href={content.links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                   <Linkedin size={18} />
                 </a>
-                <a className="icon-link" href={content.links.github} aria-label="GitHub">
+
+                <a className="icon-link" href={content.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                   <Github size={18} />
                 </a>
+
+                <a className="icon-link" href={content.links.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <WhatsAppIcon size={18} />
+                </a>
+
               </div>
             </dl>
           </CornerFrame>

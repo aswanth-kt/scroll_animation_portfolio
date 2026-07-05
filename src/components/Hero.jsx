@@ -23,7 +23,7 @@ export default function Hero() {
             <a className="btn-primary" href="#projects">
               View Projects <ArrowDownRight size={18} />
             </a>
-            <a className="btn-secondary" href={content.resume.link} target="_blank" rel="noopener noreferrer">
+            <a className="btn-secondary" href={content.links.resume} target="_blank" rel="noopener noreferrer">
               View Resume <Eye size={18} />
             </a>
             <a className="btn-secondary" href="#contact">

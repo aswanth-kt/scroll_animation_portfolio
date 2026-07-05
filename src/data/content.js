@@ -1,3 +1,16 @@
+const wa_msg = `Hello Aswanth,
+
+I came across your portfolio and was impressed by your skills and projects.
+
+We have a Full Stack Developer opportunity that matches your profile, and we'd like to discuss it with you.
+
+If you're interested, please let us know a convenient time to connect.
+
+Looking forward to hearing from you.
+
+Best regards,
+Recruitment Team`;
+
 export const content = {
   name: "Aswanth K.T",
   title: "Full Stack Developer | MERN Stack",
@@ -120,7 +133,11 @@ export const content = {
     languages: ["Malayalam (Native)", "Hindi (Fluent)", "English (Conversational)"],
     availability: "Immediately available for full-time roles",
   },
-  resume: {
-    link: "https://drive.google.com/file/d/1kBYr2Qgc6ohr5Nq4KiHSo24dX70fXcsI/view?usp=drive_link"
+  links: {
+    resume: "https://drive.google.com/file/d/1kBYr2Qgc6ohr5Nq4KiHSo24dX70fXcsI/view?usp=drive_link",
+    linkedin: "https://www.linkedin.com/in/aswanth-kt",
+    github: "https://github.com/aswanth-kt",
+    whatsapp: `https://wa.me/917560990989?text=${encodeURIComponent(wa_msg)}`,
   },
 };
+
