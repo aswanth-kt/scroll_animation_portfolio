@@ -134,7 +134,7 @@ export const content = {
     availability: "Immediately available for full-time roles",
   },
   links: {
-    resume: "https://drive.google.com/file/d/1kBYr2Qgc6ohr5Nq4KiHSo24dX70fXcsI/view?usp=drive_link",
+    resume: "https://drive.google.com/file/d/1O3gbc0TACTu_2hFDFM82lhTaD99rui0I/view?usp=sharing",
     linkedin: "https://www.linkedin.com/in/aswanth-kt",
     github: "https://github.com/aswanth-kt",
     whatsapp: `https://wa.me/917560990989?text=${encodeURIComponent(wa_msg)}`,

@@ -1,8 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="4" fill="#0F2740"/>
-  <path d="M8 16h16M16 8v16" stroke="#F2A93B" stroke-width="2.5" stroke-linecap="round"/>
-  <rect x="4" y="4" width="6" height="6" stroke="#F2A93B" stroke-width="1.5"/>
-  <rect x="22" y="4" width="6" height="6" stroke="#F2A93B" stroke-width="1.5"/>
-  <rect x="4" y="22" width="6" height="6" stroke="#F2A93B" stroke-width="1.5"/>
-  <rect x="22" y="22" width="6" height="6" stroke="#F2A93B" stroke-width="1.5"/>
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0B1120"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#bgGrad)"/>
+
+  <!-- Letter A -->
+  <path d="M 12 48 L 19.5 15.5 L 27 48" fill="none" stroke="#F8FAFC" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 14.6 33.5 L 24.4 33.5" fill="none" stroke="url(#accentGrad)" stroke-width="5.2" stroke-linecap="round"/>
+
+  <!-- Letter K -->
+  <path d="M 35 15.5 L 35 48" fill="none" stroke="#F8FAFC" stroke-width="5.2" stroke-linecap="round"/>
+  <path d="M 35 33 L 51.5 15.5" fill="none" stroke="#F8FAFC" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 36.5 30.5 L 52 48" fill="none" stroke="#F8FAFC" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
