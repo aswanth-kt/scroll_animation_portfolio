@@ -1,10 +1,18 @@
-import { Github, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
+import { useState } from "react";
+import emailjs from "@emailjs/browser";
+import { Github, Linkedin, Mail, MapPin, Phone, Send, CheckCircle, AlertCircle } from "lucide-react";
 import { content } from "../data/content";
 import CornerFrame from "./CornerFrame";
 import SectionHeader from "./SectionHeader";
 
 export default function Contact() {
-  const mailto = `mailto:${content.email}?subject=Portfolio%20enquiry%20for%20Aswanth%20K.T`;
+  const [formData, setFormData] = useState({
+    from_name: "",
+    from_email: "",
+    message: "",
+  });
+  const [state, setState] = useState("idle"); // 'idle' | 'loading' | 'success' | 'error'
+  const [errorMsg, setErrorMsg] = useState("");
 
   const WhatsAppIcon = ({ size = 22, className = "" }) => (
     <svg
@@ -23,6 +31,63 @@ export default function Contact() {
       <path d="M9.3 8.8c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.4 1.9.8 2.3.6 2.7.6.4-.1 1.2-.5 1.4-1 .2-.5.2-.9.1-1-.1-.1-.4-.2-.9-.5s-1-.5-1.2-.6c-.2-.1-.4-.1-.6.1-.2.2-.6.7-.8.8-.2.1-.3.1-.6 0-.3-.2-1.2-.5-2.2-1.5-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.6.1-.1.2-.3.4-.4.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.5-1.2-.7-1.6z"/>
     </svg>
   );
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const validateForm = () => {
+    if (!formData.from_name.trim()) {
+      setErrorMsg("Name is required");
+      return false;
+    }
+    if (!formData.from_email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.from_email)) {
+      setErrorMsg("Valid email is required");
+      return false;
+    }
+    if (!formData.message.trim()) {
+      setErrorMsg("Message is required");
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMsg("");
+
+    if (!validateForm()) {
+      setState("error");
+      return;
+    }
+
+    setState("loading");
+
+    try {
+      const response = await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          name: formData.from_name,
+          email: formData.from_email,
+          message: formData.message,
+          to_email: content.email,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      if (response.status === 200) {
+        setState("success");
+        setFormData({ from_name: "", from_email: "", message: "" });
+        setTimeout(() => setState("idle"), 3000);
+      }
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      setErrorMsg("Failed to send email. Please try again.");
+      setState("error");
+    }
+  };
 
   return (
     <section id="contact" className="section-pad bg-steel/30">
@@ -51,38 +116,72 @@ export default function Contact() {
                 </p>
               </div>
               <div className="flex gap-3 pt-2">
-
                 <a className="icon-link" href={content.links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                   <Linkedin size={18} />
                 </a>
-
                 <a className="icon-link" href={content.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                   <Github size={18} />
                 </a>
-
-                <a className="icon-link" href={content.links.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <a className="icon-link" href={content.links.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                   <WhatsAppIcon size={18} />
                 </a>
-
               </div>
             </dl>
           </CornerFrame>
           <CornerFrame>
-            <form action={mailto} method="post" encType="text/plain" className="grid gap-4">
+            <form onSubmit={handleSubmit} className="grid gap-4" noValidate>
               <label className="field-label">
                 Name
-                <input required name="name" className="field" autoComplete="name" />
+                <input
+                  required
+                  name="from_name"
+                  value={formData.from_name}
+                  onChange={handleChange}
+                  className="field"
+                  autoComplete="name"
+                  disabled={state === "loading"}
+                />
               </label>
               <label className="field-label">
                 Email
-                <input required name="email" type="email" className="field" autoComplete="email" />
+                <input
+                  required
+                  name="from_email"
+                  type="email"
+                  value={formData.from_email}
+                  onChange={handleChange}
+                  className="field"
+                  autoComplete="email"
+                  disabled={state === "loading"}
+                />
               </label>
               <label className="field-label">
                 Message
-                <textarea required name="message" rows="5" className="field resize-none" />
+                <textarea
+                  required
+                  name="message"
+                  rows="5"
+                  value={formData.message}
+                  onChange={handleChange}
+                  className="field resize-none"
+                  disabled={state === "loading"}
+                />
               </label>
-              <button className="btn-primary justify-center" type="submit">
-                Send Message <Send size={17} />
+
+              {state === "success" && (
+                <div className="flex items-center gap-2 text-sm text-paper">
+                  <CheckCircle size={16} /> Message sent! I'll get back to you soon.
+                </div>
+              )}
+
+              {state === "error" && (
+                <div className="flex items-center gap-2 text-sm text-red-400">
+                  <AlertCircle size={16} /> {errorMsg}
+                </div>
+              )}
+
+              <button className="btn-primary justify-center" type="submit" disabled={state === "loading"}>
+                {state === "loading" ? "Sending..." : "Send Message"} <Send size={17} />
               </button>
             </form>
           </CornerFrame>
