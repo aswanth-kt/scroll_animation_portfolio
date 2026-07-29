@@ -1,6 +1,6 @@
 import SectionHeader from "./SectionHeader";
 import AsciiImage from "./AsciiImage";
-import profileImage from "../assets/images/profileImage.jpeg";
+import profileImage from "../assets/images/profileImage.webp";
 
 export default function About() {
   return (
