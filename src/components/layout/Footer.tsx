@@ -8,11 +8,13 @@ import { scrollToTarget } from "./SmoothScroll";
 import Magnetic from "@/components/ui/Magnetic";
 import RollText from "@/components/ui/RollText";
 import { ArrowUp } from "@/components/ui/Icons";
+import { useCurrentYear } from "@/hooks/useCurrentYear";
 
 const WORD = "ASWANTH K.T";
 
 export default function Footer() {
   const wordRef = useRef<HTMLDivElement>(null);
+  const year = useCurrentYear();
 
   // Letters swell towards the pointer (variable font weight).
   useEffect(() => {
@@ -112,7 +114,9 @@ export default function Footer() {
       </div>
 
       <div className="container-x flex flex-col gap-3 border-t border-line py-6 eyebrow sm:flex-row sm:items-center sm:justify-between">
-        <span suppressHydrationWarning>© {new Date().getFullYear()} {site.name}. All rights reserved.</span>
+        <span>
+          © {year} {site.name}. All rights reserved.
+        </span>
         <span>Designed & built in Kannur, Kerala</span>
         <span>Next.js · GSAP · Lenis</span>
       </div>

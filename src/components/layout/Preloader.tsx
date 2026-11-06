@@ -6,6 +6,7 @@ import { introDone, loadProgress } from "@/lib/bus";
 import { setScrollLocked } from "./SmoothScroll";
 import RollingNumber from "@/components/ui/RollingNumber";
 import { pad } from "@/lib/utils";
+import { useCurrentYear } from "@/hooks/useCurrentYear";
 
 const STATUS = ["Surveying the line", "Laying track", "Loading frames", "Compiling", "All clear"];
 
@@ -18,6 +19,7 @@ export default function Preloader() {
   const root = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState(0);
   const [gone, setGone] = useState(false);
+  const year = useCurrentYear();
 
   useEffect(() => {
     const reduce = prefersReducedMotion();
@@ -96,7 +98,7 @@ export default function Preloader() {
     >
       <div className="flex items-start justify-between overflow-hidden font-mono text-[11px] tracking-[0.18em] text-muted uppercase">
         <span data-out className="block">
-          Aswanth K.T <span className="text-accent" suppressHydrationWarning>©{new Date().getFullYear()}</span>
+          Aswanth K.T <span className="text-accent">©{year}</span>
         </span>
         <span data-out className="hidden sm:block">Portfolio — Vol. 02</span>
         <span data-out className="block text-right">

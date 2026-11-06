@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger, SplitText, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { site, stats } from "@/data/content";
 import AsciiPortrait from "./AsciiPortrait";
@@ -12,6 +12,10 @@ import { ArrowUpRight } from "@/components/ui/Icons";
 export default function About() {
   const root = useRef<HTMLElement>(null);
   const [counted, setCounted] = useState(false);
+  // Stats with a `live` value (e.g. years of experience) are recomputed in the visitor's
+  // browser, so they stay current without rebuilding the site.
+  const [values, setValues] = useState(() => stats.map((s) => s.value));
+  useEffect(() => setValues(stats.map((s) => s.live?.() ?? s.value)), []);
 
   useGSAP(
     () => {
@@ -148,7 +152,7 @@ export default function About() {
             <div key={s.label} className="flex flex-col justify-between gap-8 border-b border-line py-8 pr-6 max-lg:even:border-l max-lg:even:pl-6 lg:border-b-0 lg:border-l lg:px-8 lg:first:border-l-0 lg:first:pl-0">
               <dt className="order-2 max-w-[16rem] text-sm leading-snug text-muted">{s.label}</dt>
               <dd className="order-1 flex items-start text-[clamp(3.5rem,7vw,6.5rem)] leading-none font-medium tracking-[-0.05em]">
-                <RollingNumber value={counted ? s.value : s.from} duration={1.6} stagger={0.12} delay={i * 0.12} />
+                <RollingNumber value={counted ? values[i] : s.from} srValue={values[i]} duration={1.6} stagger={0.12} delay={i * 0.12} />
                 {s.suffix && <span className="mt-[0.1em] ml-1 text-[0.32em] tracking-tight text-accent">{s.suffix}</span>}
               </dd>
             </div>

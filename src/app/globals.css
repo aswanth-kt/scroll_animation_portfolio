@@ -223,6 +223,13 @@ html.has-cursor [contenteditable] {
   pointer-events: none;
 }
 
+/* Purely visual characters (odometer digits, rolling hover letters). Drawn with CSS so
+   they never end up in copied text, search-engine text or screen-reader output — the real
+   value lives once in an .sr-only span next to them. */
+.glyph::before {
+  content: attr(data-c);
+}
+
 /* SplitText line masks: give descenders/ascenders room without moving layout */
 .line-mask {
   padding: 0.06em 0 0.14em;

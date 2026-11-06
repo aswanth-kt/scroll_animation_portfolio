@@ -3,6 +3,9 @@ import { cn } from "@/lib/utils";
 /**
  * Hover effect: the label rolls up letter by letter and a copy rolls in from below.
  * Needs a parent with the `group` class.
+ *
+ * The rolling letters are drawn with CSS (`.glyph`), so the label exists only once in the
+ * page text — copy/paste, search engines and screen readers all get the plain `text`.
  */
 export default function RollText({ text, className }: { text: string; className?: string }) {
   const chars = Array.from(text);
@@ -11,11 +14,10 @@ export default function RollText({ text, className }: { text: string; className?
       {chars.map((c, i) => (
         <span
           key={i}
-          className={cn("inline-block transition-transform duration-500 ease-[var(--ease-expo)]", hiddenClass)}
+          data-c={c === " " ? " " : c}
+          className={cn("glyph inline-block transition-transform duration-500 ease-[var(--ease-expo)]", hiddenClass)}
           style={{ transitionDelay: `${i * 18}ms` }}
-        >
-          {c === " " ? " " : c}
-        </span>
+        />
       ))}
     </span>
   );

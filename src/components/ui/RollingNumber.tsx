@@ -6,6 +6,8 @@ const DIGITS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 type Props = {
   value: string | number;
+  /** Text for screen readers / search engines when `value` is a temporary animation state. */
+  srValue?: string | number;
   className?: string;
   /** Delay between digits, right-most digit moves first. */
   stagger?: number;
@@ -17,18 +19,16 @@ type Props = {
  * Odometer-style number: every digit is a vertical 0–9 strip that rolls to its
  * value with a soft overshoot. Change `value` and the digits roll.
  */
-export default function RollingNumber({ value, className, stagger = 0.07, duration = 1.1, delay = 0 }: Props) {
+export default function RollingNumber({ value, srValue, className, stagger = 0.07, duration = 1.1, delay = 0 }: Props) {
   const chars = String(value).split("");
   return (
     <span className={cn("inline-flex tabular-nums leading-[1.1]", className)}>
-      <span className="sr-only">{value}</span>
+      <span className="sr-only">{srValue ?? value}</span>
       {chars.map((char, i) => {
         const fromRight = chars.length - 1 - i;
         if (!/\d/.test(char)) {
           return (
-            <span key={`s-${fromRight}`} aria-hidden="true">
-              {char}
-            </span>
+            <span key={`s-${fromRight}`} aria-hidden="true" data-c={char} className="glyph" />
           );
         }
         return (
@@ -41,9 +41,7 @@ export default function RollingNumber({ value, className, stagger = 0.07, durati
               }}
             >
               {DIGITS.map((d) => (
-                <span key={d} className="block h-[1.1em] leading-[1.1]">
-                  {d}
-                </span>
+                <span key={d} data-c={d} className="glyph block h-[1.1em] leading-[1.1]" />
               ))}
             </span>
           </span>

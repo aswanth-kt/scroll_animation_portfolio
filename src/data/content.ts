@@ -67,12 +67,6 @@ export const chapters = [
   },
 ] as const;
 
-export const stats = [
-  { value: "4.5", from: "0.0", suffix: "yrs", label: "Leading live railway operations" },
-  { value: "0", from: "9", suffix: "", label: "Safety incidents on my watch" },
-  { value: "15", from: "00", suffix: "+", label: "REST endpoints built & documented" },
-  { value: "5", from: "0", suffix: "", label: "Full-stack apps shipped live" },
-];
 
 /** Keys must exist in src/components/ui/BrandIcon.tsx; others render as text-only chips. */
 export const skills: { group: string; blurb: string; items: string[] }[] = [
@@ -111,6 +105,47 @@ export const skills: { group: string; blurb: string; items: string[] }[] = [
     blurb: "The everyday kit.",
     items: ["Git", "GitHub", "Postman", "VS Code", "npm", "Excel"],
   },
+];
+
+/* Stats row: developer numbers, computed at build time so they stay current.
+   (The railway facts live in the hero, the About "Before tech" note and the timeline.) */
+/** Started full-time MERN training at Brototype — 1 Sep 2024 (local date). */
+export const DEV_SINCE = { year: 2024, month: 9, day: 1 };
+
+/** When the site was built — inlined at build time (see next.config.ts). */
+export const BUILD_DATE = new Date(process.env.BUILD_TIME || Date.now());
+
+/**
+ * Whole calendar years since DEV_SINCE; ticks over on the anniversary itself (1 Sep).
+ * `utc` gives a timezone-independent answer for the pre-rendered HTML.
+ */
+export function devYearsAt(now: Date = new Date(), utc = false) {
+  const { year, month, day } = DEV_SINCE;
+  const y = utc ? now.getUTCFullYear() : now.getFullYear();
+  const anniversary = utc ? new Date(Date.UTC(y, month - 1, day)) : new Date(y, month - 1, day);
+  return Math.max(1, y - year - (now < anniversary ? 1 : 0));
+}
+
+// Value baked into the HTML (and the first render in the browser, so hydration matches);
+// About.tsx then swaps in the live value for the visitor's date.
+const devYears = devYearsAt(BUILD_DATE, true);
+const toolCount = skills.reduce((n, s) => n + s.items.length, 0);
+const toolsRounded = Math.floor(toolCount / 10) * 10;
+const zeros = (v: number) => "0".repeat(String(v).length);
+
+export type Stat = { value: string; from: string; suffix: string; label: string; live?: () => string };
+
+export const stats: Stat[] = [
+  {
+    value: String(devYears),
+    from: zeros(devYears),
+    suffix: "+ yrs",
+    label: `Building full-stack apps with the MERN stack, since ${DEV_SINCE.year}`,
+    live: () => String(devYearsAt()),
+  },
+  { value: "15", from: "00", suffix: "+", label: "REST API endpoints built & documented in production" },
+  { value: "5", from: "0", suffix: "", label: "Full-stack apps designed, built & deployed live" },
+  { value: String(toolsRounded), from: zeros(toolsRounded), suffix: "+", label: "Tools & technologies across my stack" },
 ];
 
 export const marquee = ["React", "Node.js", "Express", "MongoDB", "Redux", "Tailwind CSS", "JWT", "AWS EC2", "Nginx", "PM2", "Razorpay", "Cloudinary", "Vercel", "Git"];
