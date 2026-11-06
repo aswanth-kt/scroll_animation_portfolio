@@ -94,7 +94,8 @@ export default function About() {
                   Currently
                 </p>
                 <p className="leading-relaxed text-fg/85">
-                  {site.role} at <span className="text-fg">{site.company}</span>, which I joined in August 2026.
+                  {site.role} at <span className="text-fg">{site.company}</span> since August 2026 — building the backend,
+                  payments, real-time calling and support systems for the Tokify app.
                 </p>
               </div>
               <div data-fact>

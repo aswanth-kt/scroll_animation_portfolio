@@ -73,7 +73,7 @@ export const skills: { group: string; blurb: string; items: string[] }[] = [
   {
     group: "Backend",
     blurb: "APIs that are boring in production — on purpose.",
-    items: ["Node.js", "Express.js", "REST API Design", "MVC Architecture", "Middleware"],
+    items: ["Node.js", "Express.js", "REST API Design", "MVC Architecture", "Middleware", "Socket.io"],
   },
   {
     group: "Frontend",
@@ -83,17 +83,17 @@ export const skills: { group: string; blurb: string; items: string[] }[] = [
   {
     group: "Database",
     blurb: "Schemas designed around how the data is read.",
-    items: ["MongoDB", "Mongoose", "Aggregation Pipelines", "Schema Design", "Indexing"],
+    items: ["MongoDB", "Mongoose", "Aggregation Pipelines", "Schema Design", "Indexing", "Redis"],
   },
   {
     group: "Auth & Security",
     blurb: "Every route protected, every role separated.",
-    items: ["JWT", "bcrypt", "Google OAuth", "Passport.js", "Session Auth", "RBAC"],
+    items: ["JWT", "bcrypt", "OTP Login", "Google OAuth", "Apple Sign-In", "Passport.js", "Session Auth", "RBAC"],
   },
   {
     group: "Deployment",
     blurb: "From git push to a stable production uptime.",
-    items: ["AWS EC2", "Ubuntu", "Nginx", "PM2", "Vercel", "Render", "Netlify"],
+    items: ["AWS EC2", "Ubuntu", "Nginx", "PM2", "GitHub Actions", "Firebase", "Vercel", "Render", "Netlify"],
   },
   {
     group: "Integrations",
@@ -103,7 +103,7 @@ export const skills: { group: string; blurb: string; items: string[] }[] = [
   {
     group: "Tools",
     blurb: "The everyday kit.",
-    items: ["Git", "GitHub", "Postman", "VS Code", "npm", "Excel"],
+    items: ["Git", "GitHub", "Postman", "VS Code", "npm"],
   },
 ];
 
@@ -172,6 +172,15 @@ export const timeline: TimelineEntry[] = [
     role: "Full Stack Developer",
     org: "Talkisam Private Limited",
     tag: "Joined 17 Aug 2026",
+    meta: "Product: Tokify — an emotional-wellness app (Android & iOS) for one-to-one audio and video calls with trained listeners.",
+    bullets: [
+      "Develop Node.js and Express.js REST APIs and MongoDB data models for Tokify's users, listeners and calls.",
+      "Built the user–listener audio and video call flow with a calling SDK and Socket.io, plus OTP, Google and Apple sign-in.",
+      "Implemented the coin wallet and talk-time payments with Razorpay integration.",
+      "Built the React.js admin dashboard and safety tools, including user reporting, blocking and review of flagged calls.",
+      "Developed a customer support application with email, WhatsApp and ticketing channels for user queries.",
+    ],
+    stack: ["Node.js", "Express.js", "MongoDB", "React.js", "Socket.io", "Razorpay", "Redis", "Firebase"],
   },
   {
     kind: "work",
@@ -193,7 +202,7 @@ export const timeline: TimelineEntry[] = [
   {
     kind: "education",
     chainage: "CH 3+000",
-    period: "Sep 2024 — Present",
+    period: "Sep 2024 — Nov 2025",
     role: "MERN Stack Development Bootcamp",
     org: "Brototype",
     tag: "Full-time",

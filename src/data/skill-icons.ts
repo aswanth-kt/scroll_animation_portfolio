@@ -54,4 +54,10 @@ export const skillIcons: Record<string, string> = {
   npm: "npm",
   Excel: "excel",
   "AI API": "ai",
+  "Socket.io": "socketio",
+  Redis: "redis",
+  Firebase: "firebase",
+  "OTP Login": "otp",
+  "Apple Sign-In": "apple",
+  "GitHub Actions": "github",
 };

@@ -99,10 +99,12 @@ export default function Navbar() {
         data-scrolled="false"
         className={cn(
           "fixed inset-x-0 top-0 z-[80] transition-transform duration-500 ease-[var(--ease-expo)]",
+          // soft fade behind the bar once the page has scrolled, so the logo never sits on top of text
+          "before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-28 before:bg-gradient-to-b before:from-bg/90 before:via-bg/60 before:to-transparent before:opacity-0 before:transition-opacity before:duration-500 before:content-[''] data-[scrolled=true]:before:opacity-100",
           !open && "data-[hidden=true]:-translate-y-full",
         )}
       >
-        <nav aria-label="Primary" className="container-x flex h-20 items-center justify-between gap-4">
+        <nav aria-label="Primary" className="container-x relative flex h-20 items-center justify-between gap-4">
           <a href="#home" className="group flex items-center gap-2.5 text-sm font-semibold tracking-tight">
             <span className="sr-only">Aswanth K.T — back to top</span>
             <span aria-hidden="true" className="grid size-9 place-items-center rounded-full bg-fg text-[11px] font-bold tracking-tighter text-bg transition-colors duration-300 group-hover:bg-accent">
