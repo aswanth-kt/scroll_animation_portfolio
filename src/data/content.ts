@@ -27,7 +27,7 @@ export const site = {
   availability: "Open to opportunities",
   languages: ["Malayalam (Native)", "Hindi (Fluent)", "English (Conversational)"],
   links: {
-    resume: "https://drive.google.com/file/d/1O3gbc0TACTu_2hFDFM82lhTaD99rui0I/view?usp=sharing",
+    resume: "https://drive.google.com/file/d/1qJnrS0XmttnXSeVbWv4MhUrQyAINi7jB/view?usp=sharing",
     linkedin: "https://www.linkedin.com/in/aswanth-kt",
     github: "https://github.com/aswanth-kt",
     whatsapp: `https://wa.me/917560990989?text=${encodeURIComponent(whatsappMessage)}`,
