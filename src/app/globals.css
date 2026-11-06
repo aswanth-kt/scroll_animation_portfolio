@@ -1,0 +1,259 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+/*
+ * Palette — "Black & Champagne Gold"
+ * Change the RGB channels in :root to re-theme the whole site.
+ */
+:root {
+  --bg-rgb: 11 10 9; /* #0b0a09 warm black */
+  --fg-rgb: 239 233 223; /* #efe9df ivory */
+  --accent-rgb: 217 187 132; /* #d9bb84 champagne gold */
+  --gold-gradient: linear-gradient(180deg, #f0dcb2 0%, #d8b77b 52%, #bc9554 100%);
+}
+
+@theme {
+  --color-bg: rgb(var(--bg-rgb));
+  --color-surface: #141210;
+  --color-raised: #1b1916;
+  --color-fg: rgb(var(--fg-rgb));
+  --color-muted: #a39b8e;
+  --color-faint: #8c8478;
+  --color-line: rgb(var(--fg-rgb) / 0.1);
+  --color-line-strong: rgb(var(--fg-rgb) / 0.2);
+  --color-accent: rgb(var(--accent-rgb));
+  --color-accent-ink: rgb(var(--bg-rgb));
+  /* cool counterpoint, used for links in the terminal */
+  --color-holo: #9cc3e6;
+  --color-danger: #f08a7a;
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+  --font-serif: var(--font-instrument), "Times New Roman", serif;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-blink: blink 1s steps(1) infinite;
+  --animate-pulse-dot: pulse-dot 2s var(--ease-expo) infinite;
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  @keyframes pulse-dot {
+    0% {
+      box-shadow: 0 0 0 0 rgb(var(--accent-rgb) / 0.55);
+    }
+    100% {
+      box-shadow: 0 0 0 10px rgb(var(--accent-rgb) / 0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  em {
+    font-style: normal;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Serif italic accent words inside headings */
+  .serif {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] tracking-[0.18em] text-muted uppercase;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-line bg-white/[0.02] px-3 py-1.5 font-mono text-[11px] tracking-wide text-fg/80 transition-colors duration-300;
+  }
+
+  .btn {
+    @apply relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full px-6 py-3.5 text-sm font-medium transition-[background-color,color,transform] duration-300;
+  }
+  /* Champagne-gold button: metallic gradient, soft inner highlight, glow on hover */
+  .btn-accent {
+    @apply text-accent-ink;
+    background: var(--gold-gradient);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.45),
+      inset 0 -1px 0 rgb(0 0 0 / 0.18),
+      0 10px 30px -12px rgb(var(--accent-rgb) / 0.55);
+  }
+  .btn-accent:hover {
+    background: linear-gradient(180deg, #fbefd6 0%, #e9cf9d 55%, #cfab6b 100%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.55),
+      inset 0 -1px 0 rgb(0 0 0 / 0.15),
+      0 16px 40px -12px rgb(var(--accent-rgb) / 0.7);
+  }
+  .btn-ghost {
+    @apply border border-line-strong text-fg hover:border-fg hover:bg-fg hover:text-bg;
+  }
+
+  .field {
+    @apply w-full rounded-2xl border border-line bg-white/[0.02] px-5 pt-7 pb-3 text-base text-fg transition-colors duration-300 outline-none placeholder:text-transparent focus:border-accent/70 focus:bg-white/[0.04];
+  }
+  .field-label {
+    @apply pointer-events-none absolute top-5 left-5 origin-left font-mono text-xs tracking-wider text-muted uppercase transition-all duration-300 peer-focus:top-2.5 peer-focus:text-[10px] peer-focus:text-accent peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:text-[10px];
+  }
+}
+
+/* ---------- Custom cursor ---------- */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+html.has-cursor input,
+html.has-cursor textarea,
+html.has-cursor [contenteditable] {
+  cursor: text !important;
+}
+
+/* ---------- Film grain ---------- */
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.9s steps(4) infinite;
+}
+@keyframes grain {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-4%, 3%);
+  }
+  50% {
+    transform: translate(3%, -5%);
+  }
+  75% {
+    transform: translate(-2%, -2%);
+  }
+  100% {
+    transform: translate(5%, 4%);
+  }
+}
+
+/* ---------- Caution-tape marquee ---------- */
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ---------- Railway track (experience timeline) ---------- */
+.track {
+  background:
+    linear-gradient(var(--color-line-strong), var(--color-line-strong)) left / 2px 100% no-repeat,
+    linear-gradient(var(--color-line-strong), var(--color-line-strong)) right / 2px 100% no-repeat,
+    repeating-linear-gradient(to bottom, transparent 0 14px, var(--color-line) 14px 18px);
+}
+
+/* ---------- Spotlight cards ---------- */
+.spotlight {
+  --x: -500px;
+  --y: -500px;
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(420px circle at var(--x) var(--y), rgb(var(--accent-rgb) / 0.6), transparent 45%);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(520px circle at var(--x) var(--y), rgb(var(--accent-rgb) / 0.05), transparent 45%);
+  pointer-events: none;
+}
+
+/* Purely visual characters (odometer digits, rolling hover letters). Drawn with CSS so
+   they never end up in copied text, search-engine text or screen-reader output — the real
+   value lives once in an .sr-only span next to them. */
+.glyph::before {
+  content: attr(data-c);
+}
+
+/* SplitText line masks: give descenders/ascenders room without moving layout */
+.line-mask {
+  padding: 0.06em 0 0.14em;
+  margin: -0.06em 0 -0.14em;
+}
+
+/* Hide scrollbars inside the terminal but keep it scrollable */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .grain {
+    display: none;
+  }
+}

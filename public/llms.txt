@@ -1,0 +1,27 @@
+# Aswanth K.T — Full Stack Developer
+
+> Full Stack (MERN) Developer at Talkisam Private Limited (since August 2026), based in Kannur, Kerala, India. Open to opportunities.
+
+Before software, Aswanth spent 4.5 years as a Front Line Supervisor at L&T Construction (Railways Division), leading live track construction crews with zero safety incidents.
+
+## Experience
+- Full Stack Developer — Talkisam Private Limited (Aug 2026 – present): Tokify emotional-wellness app — Node.js/Express APIs, audio/video calling with Socket.io, OTP/Google/Apple sign-in, Razorpay coin wallet, React admin dashboard and safety tools, customer support app (email, WhatsApp, tickets)
+- MERN Stack Developer — Hall Dot X (Mar 2026 – Aug 2026): gym management platform, WhatsApp Cloud API reminders, 15+ REST endpoints, RBAC with JWT
+- MERN Stack Development Bootcamp — Brototype (Sep 2024 – Nov 2025)
+- Front Line Supervisor — L&T Construction, Railways Division (Sep 2018 – Feb 2023)
+
+## Skills
+Node.js, Express.js, React.js, Redux, JavaScript (ES6+), Tailwind CSS, Socket.io, MongoDB, Mongoose, Redis, JWT, OTP / Google / Apple sign-in, Passport.js, RBAC, AWS EC2, Nginx, PM2, GitHub Actions, Firebase, Vercel, Render, Netlify, Razorpay, Cloudinary, Git
+
+## Projects
+- [EarCrafters](https://earcrafters.onrender.com): full-stack e-commerce on AWS EC2 with Razorpay
+- [Client Project Manager](https://client-project-manager-nine.vercel.app): multi-role agency tool
+- [Payslip Generation System](https://payslip-gen-app.vercel.app): payroll automation
+- [Movie Management App](https://movie-app-box.vercel.app): REST API catalog with TMDB import
+- [CodeMate AI](https://codemate-ai-frontend.netlify.app): AI code explainer
+
+## Contact
+- Email: aswanthkt.official@gmail.com
+- GitHub: https://github.com/aswanth-kt
+- LinkedIn: https://www.linkedin.com/in/aswanth-kt
+- Résumé: https://drive.google.com/file/d/1O3gbc0TACTu_2hFDFM82lhTaD99rui0I/view
