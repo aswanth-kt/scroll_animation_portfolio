@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   output: "export",
   reactStrictMode: true,
   images: { unoptimized: true },
+  allowedDevOrigins: ['192.168.20.111'],
   env: {
     // Frozen build timestamp, identical in the server HTML and the browser bundle. Anything
     // date-based renders from this first (so hydration matches), then updates to "now".
